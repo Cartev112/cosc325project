@@ -1,0 +1,13 @@
+[project]
+name = "cuisine-prediction"
+version = "0.1.0"
+description = "COSC 325 cuisine prediction from recipe ingredients"
+requires-python = ">=3.12,<3.14"
+dependencies = ["scikit-learn>=1.5,<2", "matplotlib>=3.9,<4"]
+
+[dependency-groups]
+dev = ["pytest>=8,<10"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

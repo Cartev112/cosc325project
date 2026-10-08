@@ -1,0 +1,186 @@
+{
+  "source_url": "https://www.kaggle.com/datasets/kaggle/recipe-ingredients-dataset",
+  "source_sha256": "f18e7e568d1c606774bfb134ece51ef0a143cd5069e6f9241bb6036b45b7d2b0",
+  "normalization": "lowercase, collapse whitespace, sorted unique whole ingredients",
+  "duplicate_policy": "keep lowest ID for same-label groups; exclude conflicting-label groups",
+  "split_method": "stratified 70/30, then stratified 50/50 of the remainder",
+  "seed": 325,
+  "raw_records": 39774,
+  "retained_records": 39228,
+  "raw_class_counts": {
+    "brazilian": 467,
+    "british": 804,
+    "cajun_creole": 1546,
+    "chinese": 2673,
+    "filipino": 755,
+    "french": 2646,
+    "greek": 1175,
+    "indian": 3003,
+    "irish": 667,
+    "italian": 7838,
+    "jamaican": 526,
+    "japanese": 1423,
+    "korean": 830,
+    "mexican": 6438,
+    "moroccan": 821,
+    "russian": 489,
+    "southern_us": 4320,
+    "spanish": 989,
+    "thai": 1539,
+    "vietnamese": 825
+  },
+  "duplicate_groups": 501,
+  "conflicting_label_groups": 14,
+  "excluded_by_reason": {
+    "conflicting_labels": 30,
+    "duplicate_same_label": 516
+  },
+  "splits": {
+    "train": {
+      "records": 27459,
+      "class_counts": {
+        "brazilian": 314,
+        "british": 557,
+        "cajun_creole": 1067,
+        "chinese": 1849,
+        "filipino": 524,
+        "french": 1823,
+        "greek": 812,
+        "indian": 2085,
+        "irish": 462,
+        "italian": 5429,
+        "jamaican": 357,
+        "japanese": 969,
+        "korean": 573,
+        "mexican": 4461,
+        "moroccan": 566,
+        "russian": 340,
+        "southern_us": 2962,
+        "spanish": 683,
+        "thai": 1063,
+        "vietnamese": 563
+      }
+    },
+    "validation": {
+      "records": 5884,
+      "class_counts": {
+        "brazilian": 67,
+        "british": 120,
+        "cajun_creole": 228,
+        "chinese": 396,
+        "filipino": 113,
+        "french": 391,
+        "greek": 174,
+        "indian": 447,
+        "irish": 99,
+        "italian": 1163,
+        "jamaican": 77,
+        "japanese": 208,
+        "korean": 122,
+        "mexican": 956,
+        "moroccan": 122,
+        "russian": 73,
+        "southern_us": 634,
+        "spanish": 146,
+        "thai": 227,
+        "vietnamese": 121
+      }
+    },
+    "test": {
+      "records": 5885,
+      "class_counts": {
+        "brazilian": 67,
+        "british": 119,
+        "cajun_creole": 229,
+        "chinese": 397,
+        "filipino": 112,
+        "french": 391,
+        "greek": 174,
+        "indian": 447,
+        "irish": 99,
+        "italian": 1164,
+        "jamaican": 76,
+        "japanese": 208,
+        "korean": 123,
+        "mexican": 956,
+        "moroccan": 121,
+        "russian": 73,
+        "southern_us": 635,
+        "spanish": 146,
+        "thai": 228,
+        "vietnamese": 120
+      }
+    }
+  },
+  "training_summary": {
+    "unique_ingredients": 6051,
+    "ingredients_per_recipe": {
+      "min": 1,
+      "median": 10,
+      "mean": 10.784114497978806,
+      "max": 65
+    },
+    "most_common_ingredients": [
+      [
+        "salt",
+        12468
+      ],
+      [
+        "onions",
+        5564
+      ],
+      [
+        "olive oil",
+        5554
+      ],
+      [
+        "water",
+        5191
+      ],
+      [
+        "garlic",
+        5140
+      ],
+      [
+        "sugar",
+        4445
+      ],
+      [
+        "garlic cloves",
+        4353
+      ],
+      [
+        "butter",
+        3354
+      ],
+      [
+        "ground black pepper",
+        3317
+      ],
+      [
+        "all-purpose flour",
+        3187
+      ],
+      [
+        "pepper",
+        3074
+      ],
+      [
+        "vegetable oil",
+        3039
+      ],
+      [
+        "eggs",
+        2359
+      ],
+      [
+        "soy sauce",
+        2309
+      ],
+      [
+        "kosher salt",
+        2176
+      ]
+    ]
+  }
+}
