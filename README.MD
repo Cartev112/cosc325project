@@ -8,11 +8,11 @@ The project uses the pre-approved [Kaggle Recipe Ingredients Dataset](https://ww
 
 The central question is: **How accurately can classical machine-learning models identify cuisine from ingredients alone, and how does performance vary across cuisines?** A focused secondary experiment will test whether a change to features or class weighting improves the selected baseline.
 
-Project setup and initial data preparation are implemented. Model training remains the next stage.
+Project setup, initial data preparation, and two training-data EDA heatmaps are implemented. Model training remains the next stage.
 
 ## Current status and quick start
 
-The setup/data-preparation responsibility covers the environment, download, audit, cleanup, and fixed splits. The implementation uses two small scripts with plain functions and concise comments. No model has been trained or scored yet.
+The setup/data-preparation responsibility covers the environment, download, audit, cleanup, and fixed splits. The implementation uses small scripts with plain functions and concise comments. No model has been trained or scored yet.
 
 Install [uv](https://docs.astral.sh/uv/getting-started/installation/), then run these commands from the repository root:
 
@@ -59,6 +59,24 @@ uv run python scripts/prepare_data.py --output data/alternative --reports data/a
 ```
 
 The tests cover malformed data, phrase preservation, duplicate/conflict handling, deterministic splits, partition separation, and overwrite protection. The initial run passed all 15 tests.
+
+### EDA figures for the midterm report
+
+After preparing the data, run:
+
+```powershell
+uv run python scripts/eda.py
+```
+
+This reads only `data/prepared/train.json`, leaving validation and test data unused. It uses the existing NumPy, SciPy, scikit-learn, and Matplotlib installation without adding dependencies. Each figure is saved as a high-resolution PNG and a scalable SVG in `results/eda/`. The accompanying `summary.json` records the training-file checksum, selected ingredients and their support, similarity matrix, and strongest cuisine pairs.
+
+1. **[Distinctive ingredients](results/eda/distinctive_ingredients.png)** ([SVG](results/eda/distinctive_ingredients.svg)): rows are cuisines; columns combine the top two distinctive ingredients selected for each cuisine. An ingredient must appear in at least 10 recipes and at least 2% of that cuisine's training recipes to qualify for selection. Color shows the log₂ ratio between its prevalence within the cuisine and in all remaining recipes. Positive values indicate greater prevalence; negative values indicate lower prevalence. A half-count is added to both occurrence and absence counts to keep ratios finite. The color range is capped at ±6 for readability; exact values are retained in the summary. Selected ingredients are displayed for every cuisine, including cells below the selection threshold.
+
+2. **[Cuisine similarity](results/eda/cuisine_similarity.png)** ([SVG](results/eda/cuisine_similarity.svg)): each cuisine is represented by the fraction of its recipes containing each ingredient, multiplied by recipe-level inverse document frequency, `log((N + 1) / (ingredient_recipe_count + 1)) + 1`. Cosine similarity compares these profiles, and SciPy average-linkage clustering places similar cuisines together. All training ingredients contribute. Normalizing by cuisine size avoids comparing raw counts; IDF reduces the influence of ubiquitous ingredients.
+
+In this training split, Vietnamese–Thai has the highest off-diagonal similarity (0.837), followed by Southern US–British (0.805) and Irish–British (0.804). These are hypotheses about possible model confusion, not measured classification errors or claims about cultural authenticity. The first figure intentionally selects distinctive ingredients, so the strong cuisine-specific cells are a consequence of that selection; they are descriptive evidence, not independent proof of predictive performance. Compare the similarity figure with validation confusion matrices after baseline training.
+
+The script adds three tests for recipe-presence counting, ingredient support and prevalence ratios, and similarity normalization. The full suite now contains 18 tests. These two figures provide the report-focused EDA; the earlier count/length plot remains available as a basic audit figure.
 
 ### Handoff to modeling
 
